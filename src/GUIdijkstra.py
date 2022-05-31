@@ -58,6 +58,7 @@ class GUIdijkstra(Tk):
 
         self.frame = Frame(master = self, bg = self.primary_color)
 
+    #Fungsi untuk melakukan browse pada directory
     def browse(self):
         currdir = os.getcwd()
         tempdir = filedialog.askopenfilenames(parent=self, initialdir=currdir, title='Please select a directory', filetypes = (('txt files','*.txt'),))
@@ -66,8 +67,10 @@ class GUIdijkstra(Tk):
         self.browse_label["text"] = self.pathname
         self.plot_button["state"] = "normal"
 
+    #fungsi untuk melakukan plotting graph
     def plot(self):
 
+        #fungsi untuk memilih node
         def hilighter(event):
             (x,y)   = (event.xdata, event.ydata)
             counter = 0
@@ -97,6 +100,7 @@ class GUIdijkstra(Tk):
                     drawgraph()
                 counter += 1
 
+        #fungsi untuk mereset graph
         def reset():
             for i in range(len(self.colormap)):
                 self.colormap[i] = "b"
@@ -117,7 +121,7 @@ class GUIdijkstra(Tk):
 
             drawgraph()
             
-
+        #fungsi untuk menjalankan algoritma dijkstra
         def dijkstra():
             if self.DestNodeIndex != -1:
                 for widget in self.frame.winfo_children():
@@ -134,7 +138,8 @@ class GUIdijkstra(Tk):
                     bg = self.secondary_color)
 
                 self.reset_button.pack()
-
+                
+                #fungsi untuk memberi warna pada step selanjutnya
                 def nextGraph():
                     if self.now < len(pathDijkstra)-2:
                         self.now += 1
@@ -146,6 +151,7 @@ class GUIdijkstra(Tk):
                             counter += 1
                         drawgraph()
 
+                #fungsi untuk memberi warna pada step sebelumnya
                 def prevGraph():
                     if self.now > 0:
                         counter = 0 
@@ -177,7 +183,7 @@ class GUIdijkstra(Tk):
 
                 drawgraph()
         
-
+        #fungsi untuk menggambar graph
         def drawgraph():
             self.fig.clear() 
             nx.draw_networkx_nodes(self.G, self.pos, node_color=self.colormap, node_size = 500)

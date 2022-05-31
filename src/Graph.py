@@ -11,6 +11,7 @@ class Graph:
         self.parent = [-1] * self.row
         self.path = ""
 
+    #fungsi untuk mengembalikan layout graph menggunakan networkx
     def getnxGraph(self):
         G = nx.DiGraph()
 
@@ -27,7 +28,7 @@ class Graph:
 
         return G, pos
 
-    
+    #fungsi untuk menentukan jarak terpendek node yang terdapat pada queue
     def minDistance(self,queue):
         
         minimum = float("Inf")
@@ -40,7 +41,7 @@ class Graph:
                 min_index = i
         return min_index
 
- 
+    #fungsi untuk mengupdate path yang dihasilkan
     def updatePathRec(self, j):
         if self.parent[j] == -1 :
             self.path += self.NodeNames[j] + " "
@@ -49,7 +50,7 @@ class Graph:
         self.path += self.NodeNames[j] + " "
  
  
-    
+    #fungsi algoritma dijkstra
     def dijkstra(self, src):
 
         self.dist = [float("Inf")] * self.row
