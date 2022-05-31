@@ -1,0 +1,5 @@
+Anjay 0 1 2 3 4 
+Bnjay 1 0 2 3 4 
+Cnjay 1 2 0 3 4 
+Dnjay 1 2 3 0 4 
+Enjay 1 2 3 4 0
