@@ -1,5 +1,4 @@
 
-
 class txtreader:
     def __init__(self, filename):
         self.Lines = []
