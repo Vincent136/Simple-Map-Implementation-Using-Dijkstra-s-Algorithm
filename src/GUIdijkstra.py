@@ -16,7 +16,7 @@ class GUIdijkstra(Tk):
     def __init__(self):
         super().__init__()
         self.title("Dijkstra - 13520136")
-        self.geometry("1000x1000")
+        self.geometry("800x1000")
 
         self.primary_color = "#E8F9FD"
         self.secondary_color = "#79DAE8"
@@ -128,10 +128,19 @@ class GUIdijkstra(Tk):
                 for widget in self.frame.winfo_children():
                     widget.destroy()
 
-                self.g.dijkstra(self.SourceNodeIndex)
+                stage_count ,count, timeelapsed = self.g.dijkstra(self.SourceNodeIndex)
+
+                textIteration = "Stage Count : " + str(stage_count) + " , Full Iteration Count : " + str(count) + "\n\nTime Elapsed : " + str(timeelapsed) + " ms"
+                infoIteration = Label(master = self.frame, text = textIteration, bg = self.primary_color)
+                infoIteration.pack(pady = 5)
+
                 self.g.updatePathRec(self.DestNodeIndex)
                 pathDijkstra = self.g.path.split()
                 self.now = 0
+
+                text = "Distance from source = " + str(self.g.dist[self.DestNodeIndex]) + "  Path: " + self.g.path 
+                info = Label(master = self.frame, text = text, bg = self.primary_color)
+                info.pack(pady = 10)
 
                 self.reset_button = Button(master = self.frame, 
                      command = reset,
@@ -198,10 +207,6 @@ class GUIdijkstra(Tk):
                         bg = self.secondary_color)
 
                 self.prev_button.pack()
-
-                text = "Distance from source = " + str(self.g.dist[self.DestNodeIndex]) + "  Path: " + self.g.path 
-                info = Label(master = self.frame, text = text, bg = self.primary_color)
-                info.pack(pady = 20)
 
                 textCur = "Current Distance from source = " + str(self.g.dist[CurIndex()]) + "  Path: " + pathMaker() 
                 infoCur = Label(master = self.frame, text = textCur, bg = self.primary_color)

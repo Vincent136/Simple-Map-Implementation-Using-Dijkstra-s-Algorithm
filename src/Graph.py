@@ -1,4 +1,6 @@
 import networkx as nx
+import timeit
+import sys
 
 class Graph:
 
@@ -7,8 +9,6 @@ class Graph:
         self.AdjacencyMatrix = AdjacencyMatrix
         self.row = len(self.AdjacencyMatrix)
         self.col = len(self.AdjacencyMatrix[0])
-        self.dist = [float("Inf")] * self.row
-        self.parent = [-1] * self.row
         self.path = ""
 
     #fungsi untuk mengembalikan layout graph menggunakan networkx
@@ -31,14 +31,14 @@ class Graph:
     #fungsi untuk menentukan jarak terpendek node yang terdapat pada queue
     def minDistance(self,queue):
         
-        minimum = float("Inf")
-        min_index = -1
-         
+        minimum = sys.maxsize
+        min_index = -1 
         
         for i in range(len(self.dist)):
             if self.dist[i] < minimum and i in queue:
                 minimum = self.dist[i]
                 min_index = i
+
         return min_index
 
     #fungsi untuk mengupdate path yang dihasilkan
@@ -53,7 +53,9 @@ class Graph:
     #fungsi algoritma dijkstra
     def dijkstra(self, src):
 
-        self.dist = [float("Inf")] * self.row
+        start = timeit.default_timer()
+
+        self.dist = [sys.maxsize] * self.row
         self.parent = [-1] * self.row
 
         self.path = ""
@@ -63,6 +65,9 @@ class Graph:
             queue.append(i)
 
         self.dist[src] = 0
+
+        iteration_count = 0
+        stage_count = 0
              
         while len(queue) != 0:
 
@@ -71,9 +76,17 @@ class Graph:
             queue.remove(u)
             
             for i in range(self.col):
-                if self.AdjacencyMatrix[u][i] and i in queue:
+                if self.AdjacencyMatrix[u][i] != 0 and i in queue:
+                    
                     if self.dist[u] + self.AdjacencyMatrix[u][i] < self.dist[i]:
                         self.dist[i] = self.dist[u] + self.AdjacencyMatrix[u][i]
                         self.parent[i] = u
+                    iteration_count += 1
+            stage_count += 1
+
+        
+        stop = timeit.default_timer()
+        return stage_count, iteration_count, (stop - start)*1000
+
     
     # Referensi Kode: https://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
