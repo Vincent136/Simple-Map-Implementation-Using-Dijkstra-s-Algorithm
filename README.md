@@ -25,15 +25,15 @@ Kolom pertama pada matrix merupakan nama node
 
 contoh:
 
-Ayam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 9 0 0 2 
+Ayam  0 9 0 0 2 
 
-Sapi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5 0 0 0 6 
+Sapi 5 0 0 0 6 
 
-Bebek &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 2 0 0 0 
+Bebek 3 2 0 0 0 
 
-Kambing &nbsp;0 0 8 0 8 
+Kambing 0 0 8 0 8 
 
-Angsa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 0 0 4 0 
+Angsa 4 0 0 4 0 
 
 ## Latar Belakang
 
