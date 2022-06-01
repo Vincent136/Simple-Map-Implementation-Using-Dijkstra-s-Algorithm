@@ -1,5 +1,40 @@
 # Simple Map Implementation Using Dijkstra's Algorithm
 
+## Pembuat
+Vincent Christian Siregar - 13520136
+
+## Requirements
+	- python3
+	- tkinter
+	- matplotlib
+	- networkx
+
+untuk menginstall requirement jalankan `pip install tkinter matplotlib networkx`
+
+## Cara Menjalankan program
+1. clone repo ini
+2. masuk ke folder src
+3. jalankan GUI program menggunakan command `py GUIdijkstra.py`
+4. tekan tombol browse
+5. pilih file txt yang memiliki format seperti yang tertera pada poin selanjutnya
+6. Tekan tombol Dijkstra  untuk melakukan kalkulasi
+
+## Format file .txt
+berisi adjacency matrix yang melambangkan arah dan berat hubungan antar node
+Kolom pertama pada matrix merupakan nama node
+
+contoh:
+
+Ayam &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0 9 0 0 2 
+
+Sapi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5 0 0 0 6 
+
+Bebek &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3 2 0 0 0 
+
+Kambing &nbsp;0 0 8 0 8 
+
+Angsa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 0 0 4 0 
+
 ## Latar Belakang
 
 Algoritma Dijkstra (yang ditemukan oleh seorang programmer Edsger Dijkstra) adalah sebuah greedy algorithm yang dipakai dalam memecahkan permasalahan jarak terpendek (shortest path problem) untuk sebuah graf berarah (directed graph) dengan bobot-bobot (weight) edge yang bernilai nonnegatif [0, ∞]. Input dari algoritma ini adalah sebuah graf berarah yang juga berbobot (weighted directed graph) ***G*** dan sebuah titik asal ***s*** dalam himpunan garis ***V***.
