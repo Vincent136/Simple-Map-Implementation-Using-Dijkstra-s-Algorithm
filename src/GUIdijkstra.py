@@ -119,6 +119,7 @@ class GUIdijkstra(Tk):
 
             self.dijkstra_button.pack()
 
+            self.cnt = self.canvas.mpl_connect('button_press_event', hilighter)
             drawgraph()
             
         #fungsi untuk menjalankan algoritma dijkstra
@@ -141,7 +142,7 @@ class GUIdijkstra(Tk):
                 
                 #fungsi untuk memberi warna pada step selanjutnya
                 def nextGraph():
-                    if self.now < len(pathDijkstra)-2:
+                    if self.now < len(pathDijkstra)-1:
                         self.now += 1
                         counter = 0 
                         for node in self.G:
@@ -149,6 +150,8 @@ class GUIdijkstra(Tk):
                                 self.colormap[counter] = "orange"
                                 break
                             counter += 1
+                        
+                        UpdateInfoCur()
                         drawgraph()
 
                 #fungsi untuk memberi warna pada step sebelumnya
@@ -157,11 +160,30 @@ class GUIdijkstra(Tk):
                         counter = 0 
                         for node in self.G:
                             if node == pathDijkstra[self.now]:
-                                self.colormap[counter] = "b"
+                                if self.now != len(pathDijkstra) -1:
+                                    self.colormap[counter] = "b"
+                                else:
+                                    self.colormap[counter] = "y"
                                 break
                             counter += 1
                         self.now -= 1
+
+                        UpdateInfoCur()
                         drawgraph()
+                
+                def pathMaker():
+                    outstr = ""
+
+                    for i in range(self.now + 1):
+                        outstr += self.g.path.split()[i] + " "
+
+                    return outstr
+
+                def CurIndex():
+                    return self.g.NodeNames.index(pathDijkstra[self.now])
+
+                def UpdateInfoCur():
+                    infoCur["text"] = "Current Distance from source = " + str(self.g.dist[CurIndex()]) + "  Path: " + pathMaker() 
 
                 self.next_button = Button(master = self.frame, 
                         command = nextGraph,
@@ -180,6 +202,12 @@ class GUIdijkstra(Tk):
                 text = "Distance from source = " + str(self.g.dist[self.DestNodeIndex]) + "  Path: " + self.g.path 
                 info = Label(master = self.frame, text = text, bg = self.primary_color)
                 info.pack(pady = 20)
+
+                textCur = "Current Distance from source = " + str(self.g.dist[CurIndex()]) + "  Path: " + pathMaker() 
+                infoCur = Label(master = self.frame, text = textCur, bg = self.primary_color)
+                infoCur.pack()
+
+                self.canvas.mpl_disconnect(self.cnt)
 
                 drawgraph()
         
@@ -201,7 +229,6 @@ class GUIdijkstra(Tk):
             nx.draw_networkx_edge_labels(self.G, self.pos, edge_labels)
 
             self.canvas.draw()
-            self.cnt = self.canvas.mpl_connect('button_press_event', hilighter)
             self.canvas.get_tk_widget().pack()
 
         for widget in self.frame.winfo_children():
@@ -233,6 +260,8 @@ class GUIdijkstra(Tk):
         self.dijkstra_button.pack()
         
         self.frame.pack()
+
+        self.cnt = self.canvas.mpl_connect('button_press_event', hilighter)
         drawgraph()
 
 

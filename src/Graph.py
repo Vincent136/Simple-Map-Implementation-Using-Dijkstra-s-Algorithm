@@ -64,7 +64,7 @@ class Graph:
 
         self.dist[src] = 0
              
-        while queue:
+        while len(queue) != 0:
 
             u = self.minDistance(queue)
  
